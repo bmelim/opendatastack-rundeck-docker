@@ -1,2 +1,4 @@
 python-pip
-rundeck
+apt-transport-https
+rundeck=2.9.3
+rundeck-cli=0.1.30-1
