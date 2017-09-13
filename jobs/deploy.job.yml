@@ -29,6 +29,9 @@
         rc=$?; if [[ $rc != 0 ]]; then { echo "Failed to fetch from $RD_OPTION_GIT_URL"; exit $rc; }; fi
         git reset --hard origin/$RD_OPTION_GIT_BRANCH
         rc=$?; if [[ $rc != 0 ]]; then { echo "Failed to pull from $RD_OPTION_GIT_URL"; exit $rc; }; fi
+
+        # Deploy the stack.
+        robo stack:deploy
     keepgoing: false
     strategy: node-first
   uuid: 37b280e2-b615-4758-9a48-b04e9aea2b44

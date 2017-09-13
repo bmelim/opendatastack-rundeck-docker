@@ -34,6 +34,10 @@ RUN wget https://github.com/grails/grails-core/releases/download/v$GRAILS_VERSIO
 ENV GRAILS_HOME /var/lib/rundeck/grails
 ENV PATH $GRAILS_HOME/bin:$PATH
 
+# Install robo.
+RUN wget http://robo.li/robo.phar -O /usr/bin/robo && \
+        chmod +x /usr/bin/robo
+
 VOLUME /data
 
 COPY conf /root/rundeck-config
