@@ -2,13 +2,13 @@ version: '3'
 
 services:
   ods-rundeck-server:
-    image: ods-rundeck
+    image: opendatastack/rundeck
     depends_on:
       - ods-rundeck-mysql
     environment:
       RUNDECK_DATABASE_ENGINE: mysql
       RUNDECK_INITIAL_ADMIN_PASSWORD: apslrocks
-      RUNDECK_SERVER_URL: http://rundeck.yourdomain.com
+      # RUNDECK_SERVER_URL: http://rundeck.yourdomain.com
       RUNDECK_MYSQL_HOST: mysql
       RUNDECK_MYSQL_DATABASE: rundeckdb
       RUNDECK_MYSQL_USER: urundeck
@@ -20,6 +20,7 @@ services:
       RUNDECK_MAIL_STARTTLS: "true"
       RUNDECK_MAIL_SMTP_AUTH: "true"
       RUNDECK_MAIL_DEFAULT_FROM: noreply@yourdomain.com
+      RUNDECK_DEFAULT_PROJECT: "ODS"
     volumes:
       - ./volumes/data:/data
     links:

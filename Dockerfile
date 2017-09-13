@@ -38,6 +38,7 @@ VOLUME /data
 
 COPY conf /root/rundeck-config
 COPY conf-templates /root/rundeck-config-templates
+COPY jobs /root/jobs
 
 COPY docker-entrypoint.sh /
 ENTRYPOINT ["/docker-entrypoint.sh"]

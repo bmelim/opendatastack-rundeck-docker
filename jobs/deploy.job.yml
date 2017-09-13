@@ -1,0 +1,34 @@
+---
+- description: Clone ODS repo and run stack deploy robo command.
+  executionEnabled: true
+  group: Webhooked
+  id: 37b280e2-b615-4758-9a48-b04e9aea2b44
+  loglevel: INFO
+  name: Deploy ODS Stack
+  nodeFilterEditable: true
+  options:
+  - description: Git url to the ODS instance repository.
+    name: git_url
+  - description: Branch to use.
+    name: git_branch
+  scheduleEnabled: true
+  sequence:
+    commands:
+    - script: |-
+        #!/bin/bash
+        DEST_DIR=/var/lib/rundeck/${RD_OPTION_GIT_URL##/*/}
+        # Check destination directory. Clone if missing.
+        if [ ! -d $DEST_DIR ]; then
+          git clone $RD_OPTION_GIT_URL -b $RD_OPTION_GIT_BRANCH $DEST_DIR
+          rc=$?; if [[ $rc != 0 ]]; then { echo "Failed to clone $RD_OPTION_GIT_URL"; exit $rc; }; fi
+        fi
+
+        cd $DEST_DIR
+
+        git fetch origin
+        rc=$?; if [[ $rc != 0 ]]; then { echo "Failed to fetch from $RD_OPTION_GIT_URL"; exit $rc; }; fi
+        git reset --hard origin/$RD_OPTION_GIT_BRANCH
+        rc=$?; if [[ $rc != 0 ]]; then { echo "Failed to pull from $RD_OPTION_GIT_URL"; exit $rc; }; fi
+    keepgoing: false
+    strategy: node-first
+  uuid: 37b280e2-b615-4758-9a48-b04e9aea2b44
