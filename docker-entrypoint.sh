@@ -52,7 +52,7 @@ then
     echo "Starting Rundeck service..."
     service rundeckd start
 
-    export RD_URL='http://127.0.0.1:4440'
+    export RD_URL="http://127.0.0.1:4440"
     export RD_USER="admin"
     export RD_PASSWORD=$RUNDECK_INITIAL_ADMIN_PASSWORD
 
