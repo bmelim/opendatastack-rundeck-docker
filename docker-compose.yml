@@ -1,8 +1,8 @@
-version: '3'
+version: '2'
 
 services:
   ods-rundeck-server:
-    image: opendatastack/rundeck
+    image: opendatastack/rundeck:latest
     depends_on:
       - ods-rundeck-mysql
     environment:
@@ -22,7 +22,7 @@ services:
       RUNDECK_MAIL_DEFAULT_FROM: noreply@yourdomain.com
       RUNDECK_DEFAULT_PROJECT: "ODS"
     volumes:
-      - ./volumes/data:/data
+      - rundeck-data:/data
     links:
       - "ods-rundeck-mysql:mysql"
     ports:
@@ -35,3 +35,6 @@ services:
       MYSQL_USER: urundeck
       MYSQL_PASSWORD: rundeckpass
       MYSQL_ROOT_PASSWORD: ashoNg0aloqu2oh
+
+volumes:
+  rundeck-data:
